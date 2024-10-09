@@ -9,6 +9,6 @@ urlpatterns = [
     path('lists',views.lists,name="list"),
     # str intleri str olarak alıyor bu yüzden sıra çok önemli
     path('<int:category_id>',views.getByCategoryId),
-    path('<str:category>',views.getByCategory)
+    path('<str:category>',views.getByCategory,name="category_get")
    
 ]
