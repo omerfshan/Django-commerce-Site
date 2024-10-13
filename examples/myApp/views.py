@@ -8,7 +8,15 @@ data={
 
 }
 def index(request):
-    return  HttpResponse("merhaba")
+    list_items=""
+    category_list=list(data.keys())
+    for category in category_list:
+        redirect_path=reverse("category_get",args=[category])
+        list_items+=f"<li><a href=\"{redirect_path}\">{category}</a></li>"
+    
+    html=f"<ul>{list_items}</ul>"
+    # return  HttpResponse(html)
+    return render(request,"myApp/index.html")
 
 def details(request):
     return HttpResponse("details")
@@ -27,6 +35,9 @@ def getByCategoryId(request,category_id):
 def getByCategory(request,category):
     try:
       category_text=data[category]
-      return HttpResponse(category_text)
+      return render(request,"myApp/products.html",{
+          "category":category,
+          "category_text":category_text
+      })
     except:
         return HttpResponseNotFound("yanlış kategori secimi")
