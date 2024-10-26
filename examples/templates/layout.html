@@ -1,0 +1,19 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}{% endblock title %}</title>
+  <link rel="stylesheet" href="{% static 'css/global_style.css' %}">
+    {% block css_file %}{% endblock css_file %}
+</head>
+  <body>
+
+    {% include "partials/_header.html" %}
+    {% block content %}{% endblock %}
+    {% include "partials/_footer.html" %}
+    {% block js_scripts %}{% endblock js_scripts %}
+    <script src="{% static "global_scripts.js" %}"></script>
+  </body>
+</html>
