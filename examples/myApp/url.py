@@ -6,7 +6,7 @@ urlpatterns = [
     path('',views.index,name="index"),
     path('index',views.index,name="index"),
     path('details',views.details,name="details"),
-    path('lists',views.lists,name="list"),
+    path('lists',views.lists,name="list_view"),
     # str intleri str olarak alıyor bu yüzden sıra çok önemli
     path('<int:category_id>',views.getByCategoryId),
     path('<str:categorylink>',views.getByCategory,name="category_get")
