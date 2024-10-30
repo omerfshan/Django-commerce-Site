@@ -12,10 +12,15 @@
            
             <div class="row">
                 <div class="col-4">
-            {%for category in categories%}
-            <a class="btn btn-primary" href="{% url "category_get" categorylink=category%}">{{category}}</a>
-            
+            {%for product in products%}
+            {% if product.isActivate %}
+            <a class="btn btn-primary" href={% url "details" slug=product.slug%}>{{product.name}}</a>
+            {% endif %}
             {% endfor %}
+            <hr>
+            <p>{{price.price__avg}} tl ortalama fiyat hesaplandı.</p>  
+            <p>{{price.price__max}} tl max fiyat hesaplandı</p>
+            <p> {{price.price__min}} tl min fiyat hesaplandı</p>
         </div>
         
     </div>  
