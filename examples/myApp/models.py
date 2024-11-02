@@ -7,7 +7,22 @@ class Category(models.Model):
    
    def __str__(self):
       return self.name
-  
+
+class Address(models.Model):
+  street=models.CharField(max_length=100)
+  postal_code=models.CharField(max_length=5)
+  city=models.CharField(max_length=30)
+
+  def __str__(self):
+    return f"{self.street} {self.city} {self.postal_code}"
+
+class Supplier(models.Model):
+  company_name=models.CharField(max_length=100)
+  address=models.OneToOneField(Address,on_delete=models.CASCADE,null=True)
+
+  def __str__(self):
+    return f"{self.company_name}  {self.address}"
+
 class Product(models.Model):
   name=models.CharField(max_length=50)
   price=models.DecimalField(max_digits=8,decimal_places=2)
