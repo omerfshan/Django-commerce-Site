@@ -21,7 +21,8 @@ class Supplier(models.Model):
   address=models.OneToOneField(Address,on_delete=models.CASCADE,null=True)
 
   def __str__(self):
-    return f"{self.company_name}  {self.address}"
+    return self.company_name
+  
 
 class Product(models.Model):
   name=models.CharField(max_length=50)
@@ -30,6 +31,7 @@ class Product(models.Model):
   imageUrl=models.CharField(max_length=50)
   isActivate=models.BooleanField(default=False)
   category=models.ManyToManyField(Category)
+  supplier=models.ForeignKey(Supplier,on_delete=models.CASCADE,null=True)
   slug=models.SlugField(default="",blank=True,null=False,db_index=True,unique=True)
   
   # def save(self,*args,**kwarg):
