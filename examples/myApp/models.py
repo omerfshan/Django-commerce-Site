@@ -35,7 +35,7 @@ class Product(models.Model):
   slug=models.SlugField(default="",blank=True,null=False,db_index=True,unique=True)
   
   # def save(self,*args,**kwarg):
-  #   self.slug=slugify(self.name)
+  #   self.slug=slugify(self.name)/
   #   return super().save(*args,**kwarg)
 
   def __str__(self):
