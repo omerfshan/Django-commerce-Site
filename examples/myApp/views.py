@@ -43,7 +43,9 @@ def details(request,slug):
     return render(request,"details.html",content)
 
 def lists(request):
-    return HttpResponse("lists")
+    if request.GET['q'] and request.GET['q'] is not None:
+        q=request.GET['q']
+    product=models.Product.objects.filter(name__contains=q).order_by("-price")
 
 def getByCategoryId(request,category_id):
     category_list=list(data.keys())
@@ -65,3 +67,5 @@ def getByCategory(request,categorylink):
       })
     # except:
         # return HttpResponseNotFound("yanlış kategori secimi")
+
+
