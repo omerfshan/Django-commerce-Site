@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% load static %}
-{% block title %}index{% endblock title %}
+{% block title %}list{% endblock title %}
 
 {% block css_file %} <link rel="stylesheet" href="{% static "css/style.css" %}">{% endblock css_file %}
 
@@ -12,10 +12,7 @@
            
             <div class="row">
                 <div class="col-4">
-                    <form action="list" method="GET">
-                        <label for="q">kelime</label><input type="text" name="q">
-                         <button type="submit">SUBMİT</button>
-                    </form>
+                    
             {%for product in products%}
             {% if product.isActivate %}
             <a class="btn btn-primary" href={% url "details" slug=product.slug%}>{{product.name}}</a>

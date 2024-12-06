@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404, render,redirect
-from django.http.response import HttpResponse,HttpResponseNotFound,Http404
+from django.http.response import HttpResponse,HttpResponseNotFound,Http404,HttpResponseRedirect
 from django.urls import reverse
 from datetime import datetime
 from . import models
@@ -42,10 +42,23 @@ def details(request,slug):
     }
     return render(request,"details.html",content)
 
-def lists(request):
+def list(request):
     if request.GET['q'] and request.GET['q'] is not None:
         q=request.GET['q']
-    product=models.Product.objects.filter(name__contains=q).order_by("-price")
+        product=models.Product.objects.filter(name__contains=q).order_by("-price")
+        
+    else:
+        return HttpResponseRedirect("/products")
+
+   
+    content={
+    "products":product
+    }
+     
+    return render(request,"list.html",content)
+
+def create(request):
+    return render(request,"create.html")
 
 def getByCategoryId(request,category_id):
     category_list=list(data.keys())

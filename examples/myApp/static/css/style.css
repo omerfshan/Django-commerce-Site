@@ -1,3 +1,6 @@
 body{
     background-color: rgb(189, 236, 220) !important;
 }
+input{
+    width: 100%;
+}
