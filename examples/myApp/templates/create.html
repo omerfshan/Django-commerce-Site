@@ -11,38 +11,46 @@
       
            
      <div class="row">
-            <form action="create" method="POST">
+        
+        {% if error %}
+
+        <p>lütfen formu doldurunuz</p>
+          {% endif %}
+          <!--   <form action="create" method="POST">
                 {% csrf_token %}
                 <div class="mb-3">
                     <label for="name" class="form-label">Name</label>
-                    <input type="text" class="form-control " id="name" name="name" maxlength="50" required>
+                    <input type="text" class="form-control " id="name" name="name" maxlength="50" >
                 </div>
     
-                <!-- Price -->
+               
                 <div class="mb-3">
                     <label for="price" class="form-label">Price</label>
-                    <input type="number" class="form-control " id="price" name="price"  required>
+                    <input type="number" class="form-control " id="price" name="price"  >
                 </div>
     
-                <!-- Description -->
+                
                 <div class="mb-3">
                     <label for="description" class="form-label">Description</label>
                     <textarea class="form-control" id="description" name="description" maxlength="200" rows="3"></textarea>
                 </div>
-    
-                {% comment %} <!-- Image URL -->
+                <div class="mb-3">
+                    <label for="slug" class="form-label">Slug</label>
+                    <input type="text" class="form-control" id="slug" name="slug" required>
+                </div> 
+                {% comment %} 
                 <div class="mb-3">
                     <label for="imageUrl" class="form-label">Image URL</label>
                     <input type="text" class="form-control" id="imageUrl" name="imageUrl" maxlength="50">
                 </div>
     
-                <!-- Is Active -->
+                
                 <div class="form-check mb-3">
                     <input type="checkbox" class="form-check-input" id="isActivate" name="isActivate">
                     <label class="form-check-label" for="isActivate">Is Active</label>
                 </div>
     
-                <!-- Category -->
+               
                 <div class="mb-3">
                     <label for="category" class="form-label">Category</label>
                     <select multiple class="form-select" id="category" name="category">
@@ -52,7 +60,7 @@
                     </select>
                 </div>
     
-                <!-- Supplier -->
+                
                 <div class="mb-3">
                     <label for="supplier" class="form-label">Supplier</label>
                     <select class="form-select" id="supplier" name="supplier">
@@ -62,15 +70,15 @@
                     </select>
                 </div>
     
-                <!-- Slug -->
+              
                 <div class="mb-3">
                     <label for="slug" class="form-label">Slug</label>
                     <input type="text" class="form-control" id="slug" name="slug" required>
                 </div> {% endcomment %}
     
-                <!-- Submit Button -->
+               
                 <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+            </form> -->
            
          </div>
         

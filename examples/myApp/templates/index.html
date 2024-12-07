@@ -8,18 +8,19 @@
  <div class="container mt-2">
   
         {% comment %} <p>{{now|date:"D d M Y"}}</p> {% endcomment %}
-      
+     
            
             <div class="row">
                 <div class="col-4">
+                    <a href="{% url "create" %}">create</a>
                     <form action="list" method="GET">
                         <label for="q">kelime</label><input type="text" name="q">
                          <button type="submit">SUBMİT</button>
                     </form>
             {%for product in products%}
-            {% if product.isActivate %}
+       
             <a class="btn btn-primary" href={% url "details" slug=product.slug%}>{{product.name}}</a>
-            {% endif %}
+        
             {% endfor %}
             <hr>
             <p>{{price.price__avg}} tl ortalama fiyat hesaplandı.</p>  
