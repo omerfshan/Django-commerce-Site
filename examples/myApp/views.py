@@ -5,6 +5,7 @@ from datetime import datetime
 from . import models
 from decimal import Decimal
 from django.db.models import Avg,Max,Min
+
 data={
     "telefon":["samsung s20","Samsung s11"],
     "bilgisayar":["laptop 1","laptop 2"],
@@ -62,20 +63,21 @@ def create(request):
 
     
     error = False  # Varsayılan olarak hata yok
-    if request.method == "POST":
-        product_name = request.POST['name']
-        price = request.POST['price']
-        description = request.POST['description']
-        slug = request.POST['slug']
+    # if request.method == "POST":
+    #     product_name = request.POST['name']
+    #     price = request.POST['price']
+    #     description = request.POST['description']
+    #     slug = request.POST['slug']
 
-        # Ürün adı kontrolü
-        if product_name == "" or len(product_name) < 10:
-            error = True
-        else:
-            # Yeni ürün kaydı
-            p = models.Product(name=product_name, price=price, description=description, imageUrl="1.jpg", slug=slug)
-            p.save()
-            return HttpResponseRedirect("list")
+    #     # Ürün adı kontrolü
+    #     if product_name == "" or len(product_name) < 10:
+    #         error = True
+    #     else:
+    #         # Yeni ürün kaydı
+    #         p = models.Product(name=product_name, price=price, description=description, imageUrl="1.jpg", slug=slug)
+    #         p.save()
+    #         return HttpResponseRedirect("list")
+     
 
     return render(request, "create.html", {"error": error})
  
