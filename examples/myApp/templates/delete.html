@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block title %}index{% endblock title %}
+
+{% block css_file %} <link rel="stylesheet" href="{% static "css/style.css" %}">{% endblock css_file %}
+
+{% block content %}
+ <div class="container mt-2">
+  
+        {% comment %} <p>{{now|date:"D d M Y"}}</p> {% endcomment %}
+      
+           
+    <div class="row">
+    
+        <strong>{{product.name}}</strong> ürünü silmek istiyormusunuz ?
+        <form action="{% url 'delete' product.id %}" method="POST">
+            {% csrf_token %}
+             
+            <button type="submit" class="btn btn-danger">Evet</button>
+            <a href="{% url "list_view" %}" class="btn btn-primary">Hayır</a>
+        </form>
+    
+   
+   
+        </div>
+        
+ 
+ 
+
+</div> 
+{% endblock%}
+{% block js_scripts %}<script src="{% static "js/script.js" %}"></script>{% endblock js_scripts %}

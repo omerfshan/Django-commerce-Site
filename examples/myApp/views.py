@@ -3,6 +3,7 @@ from django.http.response import HttpResponse,HttpResponseNotFound,Http404,HttpR
 from django.urls import reverse
 from datetime import datetime
 from . import models
+from .models import Product
 from decimal import Decimal
 from django.db.models import Avg,Max,Min
 from .form import formProduct
@@ -61,29 +62,39 @@ def list(request):
     return render(request,"list.html",content)
 
 def create(request):
-    error = False  # Varsayılan olarak hata yok
+    
     if request.method == "POST":
         form=formProduct(request.POST)
+        
         if form.is_valid():
-         p = models.Product(name=form.cleaned_data['product_name'], price=form.cleaned_data['price'], description=form.cleaned_data['description'], imageUrl="1.jpg", slug=form.cleaned_data['slug'])
-         p.save()
-         return HttpResponseRedirect("list")
+         form.save()
+         return redirect("list_view")
    
-    #     product_name = request.POST['name']
-    #     price = request.POST['price']
-    #     description = request.POST['description']
-    #     slug = request.POST['slug']
-    #     # Ürün adı kontrolü
-    #     if product_name == "" or len(product_name) < 10:
-    #         error = True
-    #     else:
-    #         # Yeni ürün kaydı
-    #         
-    #         return HttpResponseRedirect("list")
+    else:
+     form=formProduct()
+    return render(request, "create.html", {"form":form})
+
+
+
+def edit(request,id):
+    product=get_object_or_404(Product,pk=id)
+    if request.method == "POST":
+        form=formProduct(request.POST,instance=product)
+        if form.is_valid():
+         form.save()
+         return redirect("list_view")
+    else:
+     form=formProduct(instance=product)
+    return render(request, "edit.html", {"form":form}) 
+
+def delete(request,id):
+    product=get_object_or_404(Product,pk=id)
+    if request.method == "POST":
+       product.delete()
+       return redirect("list_view")
     
-    form=formProduct()
-    return render(request, "create.html", {"error": error,"form":form})
- 
+    return render(request, "delete.html", {"product":product}) 
+
 
 def getByCategoryId(request,category_id):
     category_list=list(data.keys())

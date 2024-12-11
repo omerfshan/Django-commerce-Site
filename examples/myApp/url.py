@@ -7,6 +7,8 @@ urlpatterns = [
     path('index',views.index,name="index"),
     path('list',views.list,name="list_view"),
     path('create',views.create,name="create"),
+    path('edit/<int:id>',views.edit,name="edit"),
+    path('delete/<int:id>',views.delete,name="delete"),
     path('<slug:slug>',views.details,name="details"),
     # str intleri str olarak alıyor bu yüzden sıra çok önemli
     path('<int:category_id>',views.getByCategoryId),

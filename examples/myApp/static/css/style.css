@@ -1,6 +1,15 @@
 body{
     background-color: rgb(189, 236, 220) !important;
 }
-input{
+/* input{
     width: 100%;
+} */
+.errorlist{
+    list-style-type: none;
+    color: red;
+    margin: 0;
+    padding: 0;
+}
+.invalid textarea, .invalid input{
+    border-color: red;
 }
