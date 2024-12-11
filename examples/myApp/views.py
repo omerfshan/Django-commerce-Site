@@ -5,6 +5,7 @@ from datetime import datetime
 from . import models
 from decimal import Decimal
 from django.db.models import Avg,Max,Min
+from .form import formProduct
 
 data={
     "telefon":["samsung s20","Samsung s11"],
@@ -60,26 +61,28 @@ def list(request):
     return render(request,"list.html",content)
 
 def create(request):
-
-    
     error = False  # Varsayılan olarak hata yok
-    # if request.method == "POST":
+    if request.method == "POST":
+        form=formProduct(request.POST)
+        if form.is_valid():
+         p = models.Product(name=form.cleaned_data['product_name'], price=form.cleaned_data['price'], description=form.cleaned_data['description'], imageUrl="1.jpg", slug=form.cleaned_data['slug'])
+         p.save()
+         return HttpResponseRedirect("list")
+   
     #     product_name = request.POST['name']
     #     price = request.POST['price']
     #     description = request.POST['description']
     #     slug = request.POST['slug']
-
     #     # Ürün adı kontrolü
     #     if product_name == "" or len(product_name) < 10:
     #         error = True
     #     else:
     #         # Yeni ürün kaydı
-    #         p = models.Product(name=product_name, price=price, description=description, imageUrl="1.jpg", slug=slug)
-    #         p.save()
+    #         
     #         return HttpResponseRedirect("list")
-     
-
-    return render(request, "create.html", {"error": error})
+    
+    form=formProduct()
+    return render(request, "create.html", {"error": error,"form":form})
  
 
 def getByCategoryId(request,category_id):

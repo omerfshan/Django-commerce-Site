@@ -10,12 +10,12 @@
         {% comment %} <p>{{now|date:"D d M Y"}}</p> {% endcomment %}
       
            
-     <div class="row">
+    <div class="row">
         
-        {% if error %}
+      <!--    {% if error %}
 
         <p>lütfen formu doldurunuz</p>
-          {% endif %}
+          {% endif %} -->
           <!--   <form action="create" method="POST">
                 {% csrf_token %}
                 <div class="mb-3">
@@ -80,10 +80,19 @@
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form> -->
            
-         </div>
+        <form action="create" method="POST">
+                {% csrf_token %}
+                {{form}}
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    
+   
+   
+        </div>
         
  
  
+
 </div> 
 {% endblock%}
 {% block js_scripts %}<script src="{% static "js/script.js" %}"></script>{% endblock js_scripts %}
