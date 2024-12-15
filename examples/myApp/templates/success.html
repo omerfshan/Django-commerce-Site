@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block title %}index{% endblock title %}
+
+{% block css_file %} <link rel="stylesheet" href="{% static "css/style.css" %}">{% endblock css_file %}
+
+{% block content %}
+ <div class="container mt-2">
+  
+        {% comment %} <p>{{now|date:"D d M Y"}}</p> {% endcomment %}
+      
+           
+    <div class="row">
+    
+           
+        <h1 class="baslik" style="text-align:center;">işlem başarıyla gercekleşti</h1>
+        <a href="{% url "uploud" %}" class="btn btn-primary">uploud sayfa</a>
+    
+   
+   
+        </div>
+        
+ 
+ 
+
+</div> 
+{% endblock%}
+{% block js_scripts %}<script src="{% static "js/script.js" %}"></script>{% endblock js_scripts %}

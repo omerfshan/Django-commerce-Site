@@ -6,7 +6,9 @@ from . import models
 from .models import Product
 from decimal import Decimal
 from django.db.models import Avg,Max,Min
-from .form import formProduct
+from .form import formProduct,formFiles
+import random,os
+
 
 data={
     "telefon":["samsung s20","Samsung s11"],
@@ -53,6 +55,7 @@ def list(request):
         
     else:
         product=models.Product.objects.all().order_by("-price")
+       
 
    
     content={
@@ -64,7 +67,7 @@ def list(request):
 def create(request):
     
     if request.method == "POST":
-        form=formProduct(request.POST)
+        form=formProduct(request.POST,request.FILES)
         
         if form.is_valid():
          form.save()
@@ -74,12 +77,42 @@ def create(request):
      form=formProduct()
     return render(request, "create.html", {"form":form})
 
+def handle_uploaded_file(file):
+    # Kaydedilecek dizini kontrol et ve oluştur
+    temp_dir = "temp/"
+    if not os.path.exists(temp_dir):
+        os.makedirs(temp_dir)  # Dizin yoksa oluştur
+
+    # Dosya adını oluştur
+    number = random.randint(1000, 9999)
+    filename, file_extension = os.path.splitext(file.name)
+    name = filename + "_" + str(number) + file_extension
+
+    # Dosyayı kaydet
+    file_path = os.path.join(temp_dir, name)  # Tam yol oluştur
+    with open(file_path, "wb+") as destination:
+        for chunk in file.chunks():
+            destination.write(chunk)
+    
+    print(f"Dosya kaydedildi: {file_path}")
+
+def uploud(request):
+   if request.method=='POST':
+      form=formFiles(request.POST,request.FILES)
+      
+      if form.is_valid():
+        model=models.FileUploudModel(image=request.FILES['image'])
+        model.save()
+      return render(request,'success.html')
+   else:
+      form=formFiles()
+   return render(request,"uploud.html",{"form":form})
 
 
 def edit(request,id):
     product=get_object_or_404(Product,pk=id)
     if request.method == "POST":
-        form=formProduct(request.POST,instance=product)
+        form=formProduct(request.POST,request.FILES,instance=product)
         if form.is_valid():
          form.save()
          return redirect("list_view")

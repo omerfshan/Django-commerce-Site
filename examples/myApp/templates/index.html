@@ -2,35 +2,63 @@
 {% load static %}
 {% block title %}index{% endblock title %}
 
-{% block css_file %} <link rel="stylesheet" href="{% static "css/style.css" %}">{% endblock css_file %}
+{% block css_file %}
+<link rel="stylesheet" href="{% static "css/style.css" %}">
+{% endblock css_file %}
 
 {% block content %}
- <div class="container mt-2">
-  
-        {% comment %} <p>{{now|date:"D d M Y"}}</p> {% endcomment %}
-     
-           
-            <div class="row">
-                <div class="col-4">
-                    <a href="{% url "create" %}">create</a>
-                    <a href="list">product</a>
-                    <form action="list" method="GET">
-                        <label for="q">kelime</label><input type="text" name="q">
-                         <button type="submit">SUBMİT</button>
-                    </form>
-            {%for product in products%}
-       
-            <a class="btn btn-primary" href={% url "details" slug=product.slug%}>{{product.name}}</a>
-        
-            {% endfor %}
-            <hr>
-            <p>{{price.price__avg}} tl ortalama fiyat hesaplandı.</p>  
-            <p>{{price.price__max}} tl max fiyat hesaplandı</p>
-            <p> {{price.price__min}} tl min fiyat hesaplandı</p>
+<div class="container mt-5">
+    <!-- Başlık -->
+    <div class="text-center mb-4">
+        <h1 class="display-4">Ürün Yönetimi</h1>
+        <p class="lead">Ürünlerinizi kolayca yönetin ve analiz edin</p>
+    </div>
+
+    <!-- Eylem Butonları -->
+    <div class="row mb-4">
+        <div class="col text-center">
+            <a href="{% url 'create' %}" class="btn btn-success btn-lg mx-2">Yeni Ürün Oluştur</a>
+            <a href="list" class="btn btn-primary btn-lg mx-2">Ürün Listesi</a>
         </div>
-        
-    </div>  
- 
-</div> 
-{% endblock%}
-{% block js_scripts %}<script src="{% static "js/script.js" %}"></script>{% endblock js_scripts %}
+    </div>
+
+    <!-- Arama Kutusu -->
+    <div class="row mb-4">
+        <div class="col-md-6 offset-md-3">
+            <form action="list" method="GET" class="input-group">
+                <input type="text" name="q" class="form-control" placeholder="Kelime ara..." aria-label="Kelime ara">
+                <button class="btn btn-outline-secondary" type="submit">Ara</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Ürün Kartları -->
+    <div class="row">
+        {% for product in products %}
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-text">Fiyat: {{ product.price }} TL</p>
+                    <a href="{% url 'details' slug=product.slug %}" class="btn btn-primary">Detaylar</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Fiyat Analizi -->
+    <div class="row mt-5">
+        <div class="col text-center">
+            <h5 class="mb-3">Fiyat Analizi</h5>
+            <p><strong>Ortalama Fiyat:</strong> {{ price.price__avg }} TL</p>
+            <p><strong>Maksimum Fiyat:</strong> {{ price.price__max }} TL</p>
+            <p><strong>Minimum Fiyat:</strong> {{ price.price__min }} TL</p>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block js_scripts %}
+<script src="{% static "js/script.js" %}"></script>
+{% endblock js_scripts %}

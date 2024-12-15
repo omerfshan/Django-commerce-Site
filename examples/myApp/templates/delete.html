@@ -2,31 +2,30 @@
 {% load static %}
 {% block title %}index{% endblock title %}
 
-{% block css_file %} <link rel="stylesheet" href="{% static "css/style.css" %}">{% endblock css_file %}
+{% block css_file %}
+<link rel="stylesheet" href="{% static "css/style.css" %}">
+{% endblock css_file %}
 
 {% block content %}
- <div class="container mt-2">
-  
-        {% comment %} <p>{{now|date:"D d M Y"}}</p> {% endcomment %}
-      
-           
-    <div class="row">
-    
-        <strong>{{product.name}}</strong> ürünü silmek istiyormusunuz ?
-        <form action="{% url 'delete' product.id %}" method="POST">
-            {% csrf_token %}
-             
-            <button type="submit" class="btn btn-danger">Evet</button>
-            <a href="{% url "list_view" %}" class="btn btn-primary">Hayır</a>
-        </form>
-    
-   
-   
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 text-center">
+            <!-- Başlık -->
+            <div class="mb-4">
+                <strong class="text-danger">{{ product.name }}</strong> ürünü silmek istiyor musunuz?
+            </div>
+            
+            <!-- Form -->
+            <form action="{% url 'delete' product.id %}" method="POST" class="d-inline">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger me-2">Evet</button>
+            </form>
+            <a href="{% url 'list_view' %}" class="btn btn-primary">Hayır</a>
         </div>
-        
- 
- 
+    </div>
+</div>
+{% endblock content %}
 
-</div> 
-{% endblock%}
-{% block js_scripts %}<script src="{% static "js/script.js" %}"></script>{% endblock js_scripts %}
+{% block js_scripts %}
+<script src="{% static "js/script.js" %}"></script>
+{% endblock js_scripts %}

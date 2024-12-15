@@ -28,7 +28,7 @@ class Product(models.Model):
   name=models.CharField(max_length=50)
   price=models.DecimalField(max_digits=8,decimal_places=2)
   description=models.CharField(max_length=200)
-  imageUrl=models.CharField(max_length=50)
+  image = models.ImageField(upload_to='images', default="")
   isActivate=models.BooleanField(default=False)
   category=models.ManyToManyField(Category)
   supplier=models.ForeignKey(Supplier,on_delete=models.CASCADE,null=True)
@@ -40,3 +40,6 @@ class Product(models.Model):
 
   def __str__(self):
    return f"name: {self.name} price: {self.price} slug: {self.slug}"
+
+class FileUploudModel(models.Model):
+  image = models.ImageField(upload_to='images', default="")

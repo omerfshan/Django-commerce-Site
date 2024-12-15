@@ -2,39 +2,40 @@
 {% load static %}
 {% block title %}list{% endblock title %}
 
-{% block css_file %} <link rel="stylesheet" href="{% static "css/style.css" %}">{% endblock css_file %}
+{% block css_file %}
+<link rel="stylesheet" href="{% static "css/style.css" %}">
+{% endblock css_file %}
 
 {% block content %}
- <div class="container mt-2">
-  
-        {% comment %} <p>{{now|date:"D d M Y"}}</p> {% endcomment %}
-     
-          
-            <div class="row">
-                <div class="col-4">
-                   <ol>
-                   
-                    {%for product in products%}
-                    <li>
-                 
-                        {{product.name}}-{{product.price}} <a href="{% url "edit" id=product.id%}">edit</a>  <a href="{% url "delete" id=product.id%}">delete</a>
-                       
-                    </li>
-                  
-                    {% endfor %}
-                
-                </ol>
-            
-       
-           
-            <hr>
-            <p>{{price.price__avg}} tl ortalama fiyat hesaplandı.</p>  
-            <p>{{price.price__max}} tl max fiyat hesaplandı</p>
-            <p> {{price.price__min}} tl min fiyat hesaplandı</p>
+<div class="container mt-5">
+    <!-- Başlık -->
+    <div class="text-center mb-4">
+        <h1 class="display-4">Ürün Listesi</h1>
+        <p class="lead">Ürünlerinizi kart görünümüyle görüntüleyin ve yönetin.</p>
+    </div>
+
+    <!-- Ürünler Kart Görünümü -->
+    <div class="row g-4">
+        {% for product in products %}
+        <div class="col-md-4">
+            <!-- Kartın Tamamını Tıklanabilir Yap -->
+            <a href="{% url 'details' slug=product.slug %}" class="text-decoration-none text-dark">
+                <div class="card h-100 shadow-sm">
+                    {% if product.image %}
+                    <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}" style="height: 200px; object-fit: cover;">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text text-muted">{{ product.price }} TL</p>
+                    </div>
+                </div>
+            </a>
         </div>
-        
-    </div>  
- 
-</div> 
-{% endblock%}
-{% block js_scripts %}<script src="{% static "js/script.js" %}"></script>{% endblock js_scripts %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}
+
+{% block js_scripts %}
+<script src="{% static "js/script.js" %}"></script>
+{% endblock js_scripts %}

@@ -1,24 +1,40 @@
 {% extends "layout.html" %}
 {% load static %}
-{% block title %}{{product.name}}{% endblock title %}
+{% block title %}{{ product.name }}{% endblock title %}
 
-{% block css_file %} <link rel="stylesheet" href="{% static "css/style.css" %}">{% endblock css_file %}
+{% block css_file %}
+<link rel="stylesheet" href="{% static "css/style.css" %}">
+{% endblock css_file %}
 
 {% block content %}
- <div class="container mt-2">
-  
-        {% comment %} <p>{{now|date:"D d M Y"}}</p> {% endcomment %}
-      
-           
-    <div class="row">
-         <div class="col-4">
-            <h1>{{product.name}}</h1>
-            <p>{{product.description}}</p>
-            
+<div class="container mt-5">
+    <div class="row align-items-center">
+        <!-- Ürün Resmi -->
+        <div class="col-md-6">
+            {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid rounded shadow">
+            {% else %}
+            <div class="alert alert-warning text-center">Bu ürün için resim bulunmamaktadır.</div>
+            {% endif %}
         </div>
-        
-    </div>  
- 
-</div> 
-{% endblock%}
-{% block js_scripts %}<script src="{% static "js/script.js" %}"></script>{% endblock js_scripts %}
+
+        <!-- Ürün Detayları -->
+        <div class="col-md-6">
+            <h1 class="display-5">{{ product.name }}</h1>
+            <p class="text-muted">{{ product.description }}</p>
+            <h4 class="text-success">{{ product.price }} TL</h4>
+            
+            <!-- Düğmeler -->
+            <div class="mt-4">
+                <a href="{% url 'edit' id=product.id %}" class="btn btn-warning me-2">Düzenle</a>
+                <a href="{% url 'delete' id=product.id %}" class="btn btn-danger">Sil</a>
+                <a href="{% url 'list_view' %}" class="btn btn-secondary">Ürün Listesine Dön</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block js_scripts %}
+<script src="{% static "js/script.js" %}"></script>
+{% endblock js_scripts %}

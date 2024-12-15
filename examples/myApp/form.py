@@ -17,7 +17,7 @@ from .models import Product
 class formProduct(forms.ModelForm):
     class Meta:
         model = Product
-        fields = ('name', 'price', 'description', 'slug')  # 'field' yerine 'fields' olmalı.
+        fields = ('name', 'price', 'description', 'slug','image')  # 'field' yerine 'fields' olmalı.
         error_messages={
            "name":{ "blank": "Ürün adı boş bırakılamaz.",
             "max_length": "Ürün adı en fazla 50 karakter olabilir."}
@@ -35,4 +35,6 @@ class formProduct(forms.ModelForm):
             "slug": forms.TextInput(attrs={"class": "form-control"})
         }
 
+class formFiles(forms.Form):
+     image=forms.FileField()
     

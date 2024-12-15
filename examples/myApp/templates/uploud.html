@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block title %}index{% endblock title %}
+
+{% block css_file %} <link rel="stylesheet" href="{% static "css/style.css" %}">{% endblock css_file %}
+
+{% block content %}
+ <div class="container mt-2">
+  
+        {% comment %} <p>{{now|date:"D d M Y"}}</p> {% endcomment %}
+      
+           
+    <div class="row">
+    
+           
+        <form action="{% url 'uploud' %}" method="POST" enctype="multipart/form-data" >
+                {% csrf_token %}
+                {{form}}
+           
+            <button class="btn btn-primary">Uploud</button>
+        </form>
+    
+   
+   
+        </div>
+        
+ 
+ 
+
+</div> 
+{% endblock%}
+{% block js_scripts %}<script src="{% static "js/script.js" %}"></script>{% endblock js_scripts %}

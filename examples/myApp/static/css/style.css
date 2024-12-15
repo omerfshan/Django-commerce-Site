@@ -13,3 +13,6 @@ body{
 .invalid textarea, .invalid input{
     border-color: red;
 }
+.baslik{
+    text-align: center;
+}
