@@ -29,7 +29,7 @@ def index(request):
 
     # html=f"<ul>{list_items}</ul>"
     # return  HttpResponse(html)
-    return render(request,"index.html",{
+    return render(request,"myapp/index.html",{
         # "categories":category_list,
         "products":product,
         "now":datetime.now,
@@ -46,7 +46,7 @@ def details(request,slug):
     content={
         "product":product
     }
-    return render(request,"details.html",content)
+    return render(request,"myapp/details.html",content)
 
 def list(request):
     if 'q' in request.GET and request.GET.get('q'):
@@ -62,7 +62,7 @@ def list(request):
     "products":product
     }
      
-    return render(request,"list.html",content)
+    return render(request,"myapp/list.html",content)
 
 def create(request):
     
@@ -75,7 +75,7 @@ def create(request):
    
     else:
      form=formProduct()
-    return render(request, "create.html", {"form":form})
+    return render(request, "myapp/create.html", {"form":form})
 
 def handle_uploaded_file(file):
     # Kaydedilecek dizini kontrol et ve oluştur
@@ -103,10 +103,10 @@ def uploud(request):
       if form.is_valid():
         model=models.FileUploudModel(image=request.FILES['image'])
         model.save()
-      return render(request,'success.html')
+      return render(request,'myapp/success.html')
    else:
       form=formFiles()
-   return render(request,"uploud.html",{"form":form})
+   return render(request,"myapp/uploud.html",{"form":form})
 
 
 def edit(request,id):
@@ -118,7 +118,7 @@ def edit(request,id):
          return redirect("list_view")
     else:
      form=formProduct(instance=product)
-    return render(request, "edit.html", {"form":form}) 
+    return render(request, "myapp/edit.html", {"form":form}) 
 
 def delete(request,id):
     product=get_object_or_404(Product,pk=id)
@@ -126,7 +126,7 @@ def delete(request,id):
        product.delete()
        return redirect("list_view")
     
-    return render(request, "delete.html", {"product":product}) 
+    return render(request, "myapp/delete.html", {"product":product}) 
 
 
 def getByCategoryId(request,category_id):
@@ -143,7 +143,7 @@ def getByCategoryId(request,category_id):
 def getByCategory(request,categorylink):
     # try:
       products=data[categorylink]
-      return render(request,"products.html",{
+      return render(request,"myapp/products.html",{
           "category":categorylink,
           "products":products
       })
