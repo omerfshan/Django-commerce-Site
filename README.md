@@ -11,9 +11,7 @@ This project is a fully functional e-commerce website built using the Django fra
 - **User Registration and Authentication**: 
   - Sign-up, login, logout functionality.
   - Secure password management with Django's authentication system.
-- **User Profiles**: 
-  - View and update personal information.
-  - View past orders.
+
 
 ### Product Management:
 - **Product Browsing**:
@@ -22,32 +20,10 @@ This project is a fully functional e-commerce website built using the Django fra
 - **Product Details**:
   - View detailed product descriptions, prices, and availability.
 
-### Shopping Cart and Checkout:
-- **Shopping Cart**:
-  - Add products to the cart.
-  - Update or remove items from the cart.
-- **Checkout Process**:
-  - Secure checkout.
-  - Apply discounts or promo codes.
-
-### Order Management:
-- **Order Tracking**:
-  - View order status.
-  - Track delivery.
-- **Order History**:
-  - Access a history of previous orders.
-
-### Payment Integration:
-- **Secure Payment Processing**:
-  - Integration with payment gateways like Stripe or PayPal.
-  - Support for multiple payment methods.
-
 ### Admin Functionality:
 - **Product Management**:
   - Add, edit, or delete products.
   - Manage categories and inventory.
-- **Order Management**:
-  - View and process customer orders.
 - **User Management**:
   - Manage user accounts.
 
@@ -93,28 +69,11 @@ This project is a fully functional e-commerce website built using the Django fra
 
 ---
 
-## Project Structure
-
-```
-.
-├── ecommerce/               # Main project folder
-├── products/                # App for managing products
-├── cart/                    # App for managing shopping cart
-├── orders/                  # App for managing orders
-├── users/                   # App for user authentication and profiles
-├── templates/               # HTML templates
-├── static/                  # Static files (CSS, JS, Images)
-├── media/                   # Uploaded files
-├── requirements.txt         # Project dependencies
-└── manage.py                # Django management script
-```
-
----
-
 ## Technologies Used
 - **Backend**: Django
 - **Frontend**: HTML, CSS, JavaScript
 - **Database**: SQLite (default, can be replaced with PostgreSQL or MySQL)
+- **Payment Gateway**: Stripe or PayPal
 - **Deployment**: Heroku, AWS, or similar platforms
 
 ---
