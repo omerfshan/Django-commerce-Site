@@ -73,8 +73,7 @@ This project is a fully functional e-commerce website built using the Django fra
 - **Backend**: Django
 - **Frontend**: HTML, CSS, JavaScript
 - **Database**: SQLite (default, can be replaced with PostgreSQL or MySQL)
-- **Payment Gateway**: Stripe or PayPal
-- **Deployment**: Heroku, AWS, or similar platforms
+
 
 ---
 
