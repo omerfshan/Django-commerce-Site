@@ -19,6 +19,7 @@
         >
          <strong>{{error}}</strong>
         </div>
+        {% comment %} a {% endcomment %}
         {% endif %}
         <form method="POST" action="{% url 'register' %}">
             {% csrf_token %}
