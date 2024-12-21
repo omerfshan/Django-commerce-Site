@@ -11,7 +11,15 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+from django.contrib.messages import constants as message_constants
 
+MESSAGE_TAGS = {
+    message_constants.DEBUG: 'alert-secondary',  # Maps 'debug' to 'alert-secondary'
+    message_constants.INFO: 'alert-info',       # Maps 'info' to 'alert-info'
+    message_constants.SUCCESS: 'alert-success', # Maps 'success' to 'alert-success'
+    message_constants.WARNING: 'alert-warning', # Maps 'warning' to 'alert-warning'
+    message_constants.ERROR: 'alert-danger',    # Maps 'error' to 'alert-danger'
+}
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
