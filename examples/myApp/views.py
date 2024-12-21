@@ -7,6 +7,7 @@ from .models import Product
 from decimal import Decimal
 from django.db.models import Avg,Max,Min
 from .form import formProduct,formFiles
+from django.contrib.auth.decorators import login_required
 import random,os
 
 
@@ -63,7 +64,7 @@ def list(request):
     }
      
     return render(request,"myapp/list.html",content)
-
+@login_required(login_url="/account/login")
 def create(request):
     
     if request.method == "POST":
