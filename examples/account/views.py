@@ -2,34 +2,29 @@ from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.models import User
 from django.contrib import messages
+from .forms import LoginUserForms
 def login_request(request):
     if request.user.is_authenticated:
         return redirect("index")
     
     if request.method=='POST':
-        username=request.POST['username']
-        password=request.POST['password']
-        user=authenticate(request,username=username,password=password)
-       
-        if user is not None:
-            login(request,user)
-            url=request.GET.get('next',None)
-            print("GET next:", request.GET.get('next'))
-            print("POST next:", request.POST.get('next'))
-            if url is None:
-              messages.success(request,"griş başaralı")
+        form=LoginUserForms(request,data=request.POST)
+        if form.is_valid():
+            username=form.cleaned_data.get('username')
+            password=form.cleaned_data.get('password')
+            user=authenticate(request,username=username,password=password)
+            if user is not None:
+              login(request,user)
               return redirect("index")
             else:
-                return redirect(url)
+                return render(request,"account/login.html",{"form":form})
         else:
-             messages.error(request,"usename veya parola yanlış")
-             return render(request,"account/login.html",{
-          
-        })
+            return render(request,"account/login.html",{"form":form})
     else:
-        return render(request,"account/login.html",
+        form=LoginUserForms()
+        return render(request,"account/login.html",{"form":form})
+    
            
-        )
 def register_request(request):
     if request.method=='POST':
         username=request.POST['username']
